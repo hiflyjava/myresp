@@ -76,7 +76,7 @@
 
 - 依赖管理：Maven
 
-- 数据库：Oracle 11g
+- 数据库：MySQL 5.7
 
 - 版本管理：SVN，git
 
@@ -121,6 +121,6 @@
 
 GitHub 地址： https://github.com/wuyouzhuguli/FEBS
 
-下载后以maven项目导入，建议打包成war包部署。账号mrbird，密码123456，访问地址[localhsot](localhost)。
+下载后以maven项目导入，建议打包成war包部署。账号mrbird，密码123456，访问地址[localhost](localhost)。
 
 本软件使用 [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) 协议，请严格遵照协议内容
