@@ -563,6 +563,8 @@ INSERT INTO `t_user` VALUES ('125', '卑微的浮萍', 'c1cc7ea10ee9b41fd33f1293
 INSERT INTO `t_user` VALUES ('161', 'hero', '1ab36105101bab2e665eeeb954ee4aa2', '4', 'hero@qq.com', '13477589012', '0', '2018-02-05 14:54:25', '2018-02-27 14:57:20', null, '0', 'green', 'default.jpg', null);
 INSERT INTO `t_user` VALUES ('162', 'beibei', 'b5ce06e87e255d097fb6956f7fb0d8b3', '5', 'beibei@qq.com', '13488873263', '1', '2018-02-24 17:34:14', '2018-03-01 16:11:43', '2018-03-14 11:41:39', '2', 'green', '17e420c250804efe904a09a33796d5a10.jpg', '我是贝贝。');
 
+--INSERT INTO `t_user` VALUES ('1', 'brown', 'brown', '5', 'brown@qq.com', '13488873263', '1', '2018-02-24 17:34:14', '2018-03-01 16:11:43', '2018-03-14 11:41:39', '2', 'green', '17e420c250804efe904a09a33796d5a10.jpg', '我是brown');
+
 -- ----------------------------
 -- Table structure for t_user_role
 -- ----------------------------
