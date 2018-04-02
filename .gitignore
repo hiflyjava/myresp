@@ -1,8 +1,4 @@
 .classpath
-target/
-
-
-.classpath
 .project
 .settings/
 log/
