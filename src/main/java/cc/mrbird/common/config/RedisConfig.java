@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -20,6 +21,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 
 @Configuration
@@ -106,22 +108,22 @@ public class RedisConfig extends CachingConfigurerSupport {
         return template;
     }
 
-//    @Bean
-//    public KeyGenerator wiselyKeyGenerator() {
-//        return new KeyGenerator() {
-//            @Override
-//            public Object generate(Object target, Method method, Object... params) {
-//                StringBuilder sb = new StringBuilder();
-//                sb.append(target.getClass().getName());
-//                sb.append(method.getName());
-//                for (Object obj : params) {
-//                    sb.append(obj.toString());
-//                }
-//                return sb.toString();
-//            }
-//        };
-//
-//    }
+    @Bean
+    public KeyGenerator wiselyKeyGenerator() {
+        return new KeyGenerator() {
+            @Override
+            public Object generate(Object target, Method method, Object... params) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(target.getClass().getName());
+                sb.append(method.getName());
+                for (Object obj : params) {
+                    sb.append(obj.toString());
+                }
+                return sb.toString();
+            }
+        };
+
+    }
 
 
 }

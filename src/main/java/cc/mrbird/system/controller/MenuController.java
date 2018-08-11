@@ -208,7 +208,7 @@ public class MenuController extends BaseController {
             RequiresPermissions permissions = handlerMethod.getMethodAnnotation(RequiresPermissions.class);
             String perms = "";
             if (null != permissions) {
-                perms = StringUtils.join(permissions.value());
+                perms = StringUtils.join(permissions.value(),",");
             }
             Set<String> patterns = info.getPatternsCondition().getPatterns();
             for (String url : patterns) {
