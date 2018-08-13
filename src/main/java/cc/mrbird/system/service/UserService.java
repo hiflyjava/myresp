@@ -1,7 +1,5 @@
 package cc.mrbird.system.service;
 
-import java.util.List;
-
 import cc.mrbird.common.service.IService;
 import cc.mrbird.system.domain.User;
 import cc.mrbird.system.domain.UserWithRole;
@@ -9,6 +7,9 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+
+import java.util.List;
+
 @CacheConfig(cacheNames = "UserService")
 public interface UserService extends IService<User> {
 

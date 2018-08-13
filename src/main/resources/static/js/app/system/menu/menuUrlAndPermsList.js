@@ -7,7 +7,6 @@ function initUrlAndPermsList() {
     $.getJSON(ctx + "menu/urlList", function (r) {
         $('#menu-url-list').autocomplete({
             hints: r,
-            placeholder: '菜单URL',
             keyname: 'url',
             // width: 300,
             // height: 29,
@@ -21,7 +20,6 @@ function initUrlAndPermsList() {
         //    perms complete
         $('#menu-perms-list').autocomplete({
             hints: r,
-            placeholder: '权限描述',
             keyname: 'perms',
             // width: 300,
             // height: 29,

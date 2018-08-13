@@ -201,14 +201,13 @@ public class MenuController extends BaseController {
         RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         //获取url与类和方法的对应信息
         Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
-        List urlList = new ArrayList();
+        List<Map<String, String>> urlList = new ArrayList<>();
         for (RequestMappingInfo info : map.keySet()) {
-
             HandlerMethod handlerMethod = map.get(info);
             RequiresPermissions permissions = handlerMethod.getMethodAnnotation(RequiresPermissions.class);
             String perms = "";
             if (null != permissions) {
-                perms = StringUtils.join(permissions.value(),",");
+                perms = StringUtils.join(permissions.value());
             }
             Set<String> patterns = info.getPatternsCondition().getPatterns();
             for (String url : patterns) {

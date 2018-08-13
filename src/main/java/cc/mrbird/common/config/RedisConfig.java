@@ -21,7 +21,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 
 @Configuration
@@ -76,12 +75,12 @@ public class RedisConfig extends CachingConfigurerSupport {
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
 
-        //使用fastjson序列化
+        //使用 fastjson 序列化
         FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
-        // value值的序列化采用fastJsonRedisSerializer
+        // value 值的序列化采用 fastJsonRedisSerializer
         template.setValueSerializer(fastJsonRedisSerializer);
         template.setHashValueSerializer(fastJsonRedisSerializer);
-        // key的序列化采用StringRedisSerializer
+        // key 的序列化采用 StringRedisSerializer
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
 
@@ -110,48 +109,39 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
     public KeyGenerator wiselyKeyGenerator() {
-        return new KeyGenerator() {
-            @Override
-            public Object generate(Object target, Method method, Object... params) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(target.getClass().getName());
-                sb.append(method.getName());
-                for (Object obj : params) {
-                    sb.append(obj.toString());
-                }
-                return sb.toString();
+        return (target, method, params) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append(target.getClass().getName());
+            sb.append(method.getName());
+            for (Object obj : params) {
+                sb.append(obj.toString());
             }
+            return sb.toString();
         };
 
     }
-
-
 }
-
 
 class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
     private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
     private Class<T> clazz;
 
-    public FastJsonRedisSerializer(Class<T> clazz) {
+    FastJsonRedisSerializer(Class<T> clazz) {
         super();
         this.clazz = clazz;
     }
 
     @Override
     public byte[] serialize(T t) throws SerializationException {
-        if (null == t) {
-            return new byte[0];
-        }
         return JSON.toJSONString(t, SerializerFeature.WriteClassName).getBytes(DEFAULT_CHARSET);
     }
 
     @Override
     public T deserialize(byte[] bytes) throws SerializationException {
-        if (null == bytes || bytes.length <= 0) {
+        if (bytes.length <= 0) {
             return null;
         }
         String str = new String(bytes, DEFAULT_CHARSET);
-        return (T) JSON.parseObject(str, clazz);
+        return JSON.parseObject(str, clazz);
     }
 }

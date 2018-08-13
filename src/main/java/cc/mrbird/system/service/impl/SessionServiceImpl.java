@@ -1,11 +1,10 @@
 package cc.mrbird.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.mgt.SecurityManager;
+import cc.mrbird.common.util.AddressUtils;
+import cc.mrbird.system.domain.User;
+import cc.mrbird.system.domain.UserOnline;
+import cc.mrbird.system.service.SessionService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -13,12 +12,9 @@ import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import cc.mrbird.common.util.AddressUtils;
-import cc.mrbird.system.domain.User;
-import cc.mrbird.system.domain.UserOnline;
-import cc.mrbird.system.service.SessionService;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Shiro Session 对象管理
@@ -76,8 +72,6 @@ public class SessionServiceImpl implements SessionService {
         session.setTimeout(0);
         session.stop();
         sessionDAO.delete(session);
-
-
         return true;
     }
 

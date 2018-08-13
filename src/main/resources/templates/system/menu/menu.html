@@ -1,5 +1,4 @@
 <link rel="stylesheet" data-th-href="@{css/autocomplete/autocomplete.css}">
-
 <style>
     .autocomplete-input {
         padding: 0;
@@ -12,8 +11,11 @@
     .autocomplete-container {
         position: relative;
         width: 1rem;
-        height: 1rem;
+        height: 1rem !important;
         margin: 0  ;
+    }
+    .proposal-box {
+        z-index: 1000 !important;
     }
 </style>
 <div data-th-include="system/menu/menuAdd"></div>
@@ -81,5 +83,4 @@
 </div>
 <script data-th-src="@{js/app/system/menu/menu.js}"></script>
 <script data-th-src="@{js/app/system/menu/menuEdit.js}"></script>
-
 <script data-th-src="@{js/app/system/menu/menuUrlAndPermsList.js}"></script>
