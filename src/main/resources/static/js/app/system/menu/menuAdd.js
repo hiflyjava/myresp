@@ -40,6 +40,7 @@ $(function () {
     });
 
     $("#menu-add .btn-save").click(function () {
+        debugger
         var name = $(this).attr("name");
         getMenu();
         validator = $menuAddForm.validate();

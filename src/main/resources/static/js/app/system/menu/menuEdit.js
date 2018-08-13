@@ -24,6 +24,9 @@ function updateMenu() {
             $form.find("input[name='icon']").val(menu.icon);
             $form.find("input[name='url']").val(menu.url);
             $form.find("input[name='perms']").val(menu.perms);
+
+            // $('#menu-perms-list').text(menu.perms);
+            // $('#menu-url-list').text(menu.url);
             $menuTree.jstree('select_node', menu.parentId, true);
             $menuTree.jstree('disable_node', menu.menuId);
             $("#menu-add-button").attr("name", "update");
