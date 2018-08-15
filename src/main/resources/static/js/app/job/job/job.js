@@ -45,6 +45,7 @@ $(function () {
     };
 
     $MB.initTable('jobTable', settings);
+    initSysCronClazzList();
 });
 
 function search() {
@@ -186,4 +187,38 @@ function exportJobCsv() {
             $MB.n_warning(r.msg);
         }
     });
+}
+
+function initSysCronClazzList() {
+    // urls complete
+    $.getJSON(ctx + "job/getSysCronClazz", function (r) {
+        debugger
+        r = r.code == 0 ? r.msg : []
+        $('#sys-cron-clazz-list-bean').autocomplete({
+            hints: r,
+            keyname: 'beanName',
+            width: 70,
+            // height: 32,
+            valuename: 'beanName',
+            showButton: false,
+            onSubmit: function (text) {
+                $('#sys-cron-clazz-list-bean').siblings("input[name='beanName']").val(text);
+
+            }
+        });
+        //    perms complete
+        $('#sys-cron-clazz-list-method').autocomplete({
+            hints: r,
+            keyname: 'beanName',
+            width: 70,
+            // height: 31,
+            valuename: 'methodName',
+            showButton: false,
+            onSubmit: function (text) {
+                $('#sys-cron-clazz-list-method').siblings("input[name='methodName']").val(text);
+            }
+        });
+    });
+
+
 }

@@ -4,24 +4,30 @@ import java.util.List;
 
 import cc.mrbird.common.service.IService;
 import cc.mrbird.job.domain.Job;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
-public interface JobService extends IService<Job>{
-	
-	Job findJob(Long jobId);
+@CacheConfig(cacheNames = "JobService")
+public interface JobService extends IService<Job> {
 
-	List<Job> findAllJobs(Job job);
+    Job findJob(Long jobId);
 
-	void addJob(Job job);
+    List<Job> findAllJobs(Job job);
 
-	void updateJob(Job job);
+    void addJob(Job job);
 
-	void deleteBatch(String jobIds);
+    void updateJob(Job job);
 
-	int updateBatch(String jobIds, String status);
+    void deleteBatch(String jobIds);
 
-	void run(String jobIds);
+    int updateBatch(String jobIds, String status);
 
-	void pause(String jobIds);
+    void run(String jobIds);
 
-	void resume(String jobIds);
+    void pause(String jobIds);
+
+    void resume(String jobIds);
+
+//    @Cacheable(key = "#p0")
+    List<Job> getSysCronClazz(Job job);
 }
