@@ -1,7 +1,12 @@
 package cc.mrbird.system.controller;
 
-import java.util.*;
-
+import cc.mrbird.common.annotation.Log;
+import cc.mrbird.common.controller.BaseController;
+import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.domain.Tree;
+import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.system.domain.Menu;
+import cc.mrbird.system.service.MenuService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cc.mrbird.common.annotation.Log;
-import cc.mrbird.common.controller.BaseController;
-import cc.mrbird.common.domain.ResponseBo;
-import cc.mrbird.common.domain.Tree;
-import cc.mrbird.common.util.FileUtils;
-import cc.mrbird.system.domain.Menu;
-import cc.mrbird.system.service.MenuService;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MenuController extends BaseController {
@@ -197,9 +193,7 @@ public class MenuController extends BaseController {
     @GetMapping("menu/urlList")
     @ResponseBody
     public List<Map<String, String>> getAllUrl() {
-        List<Map<String, String>> urlList = this.menuService.getAllUrl("1");
-
-        return urlList;
+        return this.menuService.getAllUrl("1");
     }
 
 }

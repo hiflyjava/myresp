@@ -174,8 +174,8 @@ public class JobController extends BaseController {
     }
 
     /**
-     * @param job
-     * @return
+     * @param job 定时任务
+     * @return ResponseBo
      */
     @RequestMapping("job/getSysCronClazz")
     @ResponseBody

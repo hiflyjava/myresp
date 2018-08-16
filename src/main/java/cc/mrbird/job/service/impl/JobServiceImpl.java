@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 import cc.mrbird.common.annotation.CronTag;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.WordUtils;
 import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
 import org.reflections.Reflections;
@@ -150,9 +151,9 @@ public class JobServiceImpl extends BaseService<Job> implements JobService {
                 Job job1 = new Job();
                 String methodName = method.getName();
                 Parameter[] methodParameters = method.getParameters();
-                String params = String.format("%s(%s)", methodName, Arrays.asList(methodParameters).stream().map(item -> item.getType().getSimpleName() + " " + item.getName()).collect(Collectors.joining(", ")));
+                String params = String.format("%s(%s)", methodName, Arrays.stream(methodParameters).map(item -> item.getType().getSimpleName() + " " + item.getName()).collect(Collectors.joining(", ")));
 
-                job1.setBeanName(clsSimpleName);
+                job1.setBeanName(WordUtils.uncapitalize(clsSimpleName));
                 job1.setMethodName(methodName);
                 job1.setParams(params);
                 jobList.add(job1);

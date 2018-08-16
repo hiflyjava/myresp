@@ -1,7 +1,6 @@
 package cc.mrbird.job.task;
 
 import cc.mrbird.common.annotation.CronTag;
-import org.springframework.stereotype.Component;
 
 @CronTag("testTask")
 public class TestTask {
@@ -15,7 +14,6 @@ public class TestTask {
     }
 
     public void test2(int num, String str, Object obj, TestTask task) {
-
         System.out.println("四个参数方法，正在被执行");
     }
 
