@@ -2,6 +2,7 @@ package cc.mrbird.common.aspect;
 
 import cc.mrbird.common.annotation.Limit;
 import cc.mrbird.common.domain.LimitType;
+import cc.mrbird.common.exception.LimitAccessException;
 import cc.mrbird.common.util.IPUtils;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
@@ -47,7 +48,7 @@ public class LimitAspect{
     }
 
     @Around("pointcut()")
-    public Object around(ProceedingJoinPoint point) {
+    public Object around(ProceedingJoinPoint point) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
 
         MethodSignature signature = (MethodSignature) point.getSignature();
@@ -69,7 +70,6 @@ public class LimitAspect{
                 key = StringUtils.upperCase(method.getName());
         }
         ImmutableList<String> keys = ImmutableList.of(StringUtils.join(limitAnnotation.prefix() + "_", key));
-        try {
             String luaScript = buildLuaScript();
             RedisScript<Number> redisScript = new DefaultRedisScript<>(luaScript, Number.class);
             Number count = limitRedisTemplate.execute(redisScript, keys, limitCount, limitPeriod);
@@ -77,14 +77,9 @@ public class LimitAspect{
             if (count != null && count.intValue() <= limitCount) {
                 return point.proceed();
             } else {
-                throw new RuntimeException("接口访问超出频率限制");
+                throw new LimitAccessException("接口访问超出频率限制");
             }
-        } catch (Throwable e) {
-            if (e instanceof RuntimeException) {
-                throw new RuntimeException(e.getLocalizedMessage());
-            }
-            throw new RuntimeException("系统异常");
-        }
+
     }
 
     /**
