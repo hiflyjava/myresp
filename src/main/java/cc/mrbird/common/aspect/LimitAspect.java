@@ -32,7 +32,7 @@ import java.util.Objects;
  */
 @Aspect
 @Component
-public class LimitAspect{
+public class LimitAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LimitAspect.class);
 
@@ -85,6 +85,7 @@ public class LimitAspect{
     /**
      * 限流脚本
      * 调用的时候不超过阈值，则直接返回并执行计算器自加。
+     *
      * @return lua脚本
      */
     private String buildLuaScript() {
