@@ -26,6 +26,7 @@
         <docker.registry>HOST yours:5000</docker.registry>
         <!-- TODO change here to be your docker registry  IP  -->
         <relativePath/>
+        <kotlin.version>1.2.61</kotlin.version>
     </properties>
 
     <dependencies>
@@ -193,17 +194,24 @@
             <artifactId>guava</artifactId>
             <version>25.1-jre</version>
         </dependency>
-
-        <!-- ip2region -->
         <dependency>
             <groupId>org.lionsoul</groupId>
             <artifactId>ip2region</artifactId>
             <version>1.7</version>
         </dependency>
-
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -287,6 +295,27 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <extensions>true</extensions>
@@ -308,7 +337,7 @@
                 </executions>
                 <configuration>
                     <compilerArgs>
-                        <!-- 开启此参数 可通过反射获取方法的原始参数名，非以 args 开头 java1.8有效,add by jyao -->
+                        <!-- 开启此参数 可通过反射获取方法的原始参数名 非 以 args 开头 java1.8  有效,add  by jyao-->
                         <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
