@@ -46,7 +46,7 @@ public class AddressUtils {
 			reader.close();
 			return buffer.toString();
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		} finally {
 			if (connection != null) {
 				connection.disconnect();
