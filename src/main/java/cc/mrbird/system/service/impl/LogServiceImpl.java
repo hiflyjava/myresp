@@ -112,7 +112,7 @@ public class LogServiceImpl extends BaseService<SysLog> implements LogService {
                     list.add(((Map) args[i]).get(key));
                     paramList.add(key);
                 }
-                handleParams(params, list.toArray(), paramList);
+                return handleParams(params, list.toArray(), paramList);
 
             } else {
                 if (args[i] instanceof Serializable) {
