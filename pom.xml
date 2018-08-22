@@ -26,7 +26,6 @@
         <docker.registry>HOST yours:5000</docker.registry>
         <!-- TODO change here to be your docker registry  IP  -->
         <relativePath/>
-        <kotlin.version>1.2.61</kotlin.version>
     </properties>
 
     <dependencies>
@@ -199,21 +198,6 @@
             <artifactId>ip2region</artifactId>
             <version>1.7</version>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-reflect</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
-            <scope>test</scope>
-        </dependency>
         <!-- jasypt-->
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
@@ -270,11 +254,11 @@
             -->
             <!-- 按需使用-->
             <!--<plugin>-->
-                <!--<groupId>pl.project13.maven</groupId>-->
-                <!--<artifactId>git-commit-id-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>-->
-                <!--</configuration>-->
+            <!--<groupId>pl.project13.maven</groupId>-->
+            <!--<artifactId>git-commit-id-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>-->
+            <!--</configuration>-->
             <!--</plugin>-->
             <plugin>
                 <groupId>com.spotify</groupId>
@@ -300,27 +284,6 @@
                         </resource>
                     </resources>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
