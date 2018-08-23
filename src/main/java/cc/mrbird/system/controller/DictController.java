@@ -37,7 +37,7 @@ public class DictController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> dictList(QueryRequest request, Dict dict) {
 		PageHelper.startPage(request.getPageNum(), request.getPageSize());
-		List<Dict> list = this.dictService.findAllDicts(dict);
+		List<Dict> list = this.dictService.findAllDicts(dict,request);
 		PageInfo<Dict> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);
 	}
@@ -46,7 +46,7 @@ public class DictController extends BaseController {
 	@ResponseBody
 	public ResponseBo dictExcel(Dict dict) {
 		try {
-			List<Dict> list = this.dictService.findAllDicts(dict);
+			List<Dict> list = this.dictService.findAllDicts(dict,null);
 			return FileUtils.createExcelByPOIKit("字典表", list, Dict.class);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class DictController extends BaseController {
 	@ResponseBody
 	public ResponseBo dictCsv(Dict dict){
 		try {
-			List<Dict> list = this.dictService.findAllDicts(dict);
+			List<Dict> list = this.dictService.findAllDicts(dict,null);
 			return FileUtils.createCsv("字典表", list, Dict.class);
 		} catch (Exception e) {
 			e.printStackTrace();
