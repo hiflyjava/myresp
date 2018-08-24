@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ import java.util.*;
 @Service("logService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class LogServiceImpl extends BaseService<SysLog> implements LogService {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     ObjectMapper objectMapper;
 
@@ -50,7 +55,7 @@ public class LogServiceImpl extends BaseService<SysLog> implements LogService {
             example.setOrderByClause("create_time desc");
             return this.selectByExample(example);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("获取系统日志失败", e);
             return new ArrayList<>();
         }
     }
@@ -118,7 +123,7 @@ public class LogServiceImpl extends BaseService<SysLog> implements LogService {
                 if (args[i] instanceof Serializable) {
                     Class<?> aClass = args[i].getClass();
                     try {
-                        Method declaredMethod = aClass.getDeclaredMethod("toString", null);
+                        aClass.getDeclaredMethod("toString", null);
                         // 如果不抛出NoSuchMethodException 异常则存在 toString 方法 ，安全的writeValueAsString ，否则 走 Object的 toString方法
                         params.append("  ").append(paramNames.get(i)).append(": ").append(objectMapper.writeValueAsString(args[i]));
                     } catch (NoSuchMethodException e) {

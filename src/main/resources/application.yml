@@ -102,8 +102,6 @@ spring:
         password: 123456
   application:
     name: febs
-  profiles:
-    active: local
 
 info:
   app:

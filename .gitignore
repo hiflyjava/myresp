@@ -5,3 +5,5 @@ log/
 target/
 .idea/
 project.iml
+sonar-project.properties
+.scannerwork/

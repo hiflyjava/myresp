@@ -5,7 +5,6 @@ import cc.mrbird.system.domain.User;
 import cc.mrbird.system.domain.UserWithRole;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public interface UserService extends IService<User> {
 
     void updateTheme(String theme, String userName);
 
-    @CachePut(key = "#p0")
+    @CacheEvict(allEntries = true)
     void addUser(User user, Long[] roles);
 
     @CacheEvict(key = "#p0", allEntries = true)
