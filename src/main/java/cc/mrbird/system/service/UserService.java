@@ -17,9 +17,9 @@ public interface UserService extends IService<User> {
 
     User findByName(String userName);
 
-    @Cacheable(key = "'user_'+#p0")
+    @Cacheable(key = "#p0")
     List<User> findUserWithDept(User user);
-
+    @CacheEvict(key = "#p0", allEntries = true)
     void registUser(User user);
 
     void updateTheme(String theme, String userName);
@@ -27,7 +27,7 @@ public interface UserService extends IService<User> {
     @CachePut(key = "#p0")
     void addUser(User user, Long[] roles);
 
-    @CachePut
+    @CacheEvict(key = "#p0", allEntries = true)
     void updateUser(User user, Long[] roles);
 
     @CacheEvict(key = "#p0", allEntries = true)

@@ -1,5 +1,6 @@
 package cc.mrbird.system.service.impl;
 
+import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.service.impl.BaseService;
 import cc.mrbird.system.domain.Dict;
 import cc.mrbird.system.service.DictService;
@@ -20,7 +21,7 @@ import java.util.List;
 public class DictServiceImpl extends BaseService<Dict> implements DictService {
 
 	@Override
-	public List<Dict> findAllDicts(Dict dict) {
+	public List<Dict> findAllDicts(Dict dict, QueryRequest request) {
 		try {
 			Example example = new Example(Dict.class);
 			Criteria criteria = example.createCriteria();
