@@ -205,6 +205,7 @@ public class ShiroConfig {
         sessionManager.setGlobalSessionTimeout(febsProperties.getShiro().getSessionTimeout());
         sessionManager.setSessionListeners(listeners);
         sessionManager.setSessionDAO(redisSessionDAO());
+        sessionManager.setSessionIdUrlRewritingEnabled(false);
         return sessionManager;
     }
 }
