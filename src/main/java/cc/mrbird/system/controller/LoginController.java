@@ -85,8 +85,8 @@ public class LoginController extends BaseController {
                     febsProperties.getValidateCode().getWidth(),
                     febsProperties.getValidateCode().getHeight(),
                     febsProperties.getValidateCode().getLength());
-            captcha.out(response.getOutputStream());
             HttpSession session = request.getSession(true);
+            captcha.out(response.getOutputStream());
             session.removeAttribute(CODE_KEY);
             session.setAttribute(CODE_KEY, captcha.text().toLowerCase());
         } catch (Exception e) {
