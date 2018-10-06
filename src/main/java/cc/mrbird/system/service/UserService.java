@@ -17,7 +17,7 @@ public interface UserService extends IService<User> {
 
     User findByName(String userName);
 
-    @Cacheable(key = "#p0.toString()+ #p1.toString()")
+    @Cacheable(key = "#p0.toString() + (#p1 != null ? #p1.toString() : '')")
     List<User> findUserWithDept(User user, QueryRequest request);
 
     @CacheEvict(key = "#p0", allEntries = true)
