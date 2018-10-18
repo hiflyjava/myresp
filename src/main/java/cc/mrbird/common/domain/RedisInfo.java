@@ -105,7 +105,7 @@ public class RedisInfo {
 
     private String key;
     private String value;
-    private String desctiption;
+    private String description;
 
     public String getKey() {
         return key;
@@ -113,7 +113,7 @@ public class RedisInfo {
 
     public void setKey(String key) {
         this.key = key;
-        this.desctiption = map.get(this.key);
+        this.description = map.get(this.key);
     }
 
     public String getValue() {
@@ -124,12 +124,12 @@ public class RedisInfo {
         this.value = value;
     }
 
-    public String getDesctiption() {
-        return desctiption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesctiption(String desctiption) {
-        this.desctiption = desctiption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -137,7 +137,7 @@ public class RedisInfo {
         return "RedisInfo{" +
                 "key='" + key + '\'' +
                 ", value='" + value + '\'' +
-                ", desctiption='" + desctiption + '\'' +
+                ", desctiption='" + description + '\'' +
                 '}';
     }
 }
