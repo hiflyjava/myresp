@@ -307,4 +307,16 @@ public class User implements Serializable {
 				", roleName='" + roleName + '\'' +
 				'}';
 	}
+
+	/**
+	 * shiro-redis v3.1.0 必须要有getAuthCacheKey()或者getId()方法
+	 * # Principal id field name. The field which you can get unique id to identify this principal.
+	 * # For example, if you use UserInfo as Principal class, the id field maybe userId, userName, email, etc.
+	 * # Remember to add getter to this id field. For example, getUserId(), getUserName(), getEmail(), etc.
+	 * # Default value is authCacheKey or id, that means your principal object has a method called "getAuthCacheKey()" or "getId()"
+	 * @return userId as Principal id field name
+	 */
+	public Long getAuthCacheKey() {
+		return userId;
+	}
 }
