@@ -1,8 +1,11 @@
 package cc.mrbird.system.controller;
 
-import java.util.List;
-import java.util.Map;
-
+import cc.mrbird.common.controller.BaseController;
+import cc.mrbird.common.domain.QueryRequest;
+import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.system.domain.SysLog;
+import cc.mrbird.system.service.LogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,15 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
-import cc.mrbird.common.controller.BaseController;
-import cc.mrbird.common.domain.QueryRequest;
-import cc.mrbird.common.domain.ResponseBo;
-import cc.mrbird.common.util.FileUtils;
-import cc.mrbird.system.domain.SysLog;
-import cc.mrbird.system.service.LogService;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LogController extends BaseController {
@@ -38,10 +34,7 @@ public class LogController extends BaseController {
     @RequestMapping("log/list")
     @ResponseBody
     public Map<String, Object> logList(QueryRequest request, SysLog log) {
-        PageHelper.startPage(request.getPageNum(), request.getPageSize());
-        List<SysLog> list = this.logService.findAllLogs(log);
-        PageInfo<SysLog> pageInfo = new PageInfo<>(list);
-        return getDataTable(pageInfo);
+        return super.selectByPageNumSize(request, () -> this.logService.findAllLogs(log));
     }
 
     @RequestMapping("log/excel")

@@ -1,8 +1,12 @@
 package cc.mrbird.system.controller;
 
-import java.util.List;
-import java.util.Map;
-
+import cc.mrbird.common.annotation.Log;
+import cc.mrbird.common.controller.BaseController;
+import cc.mrbird.common.domain.QueryRequest;
+import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.system.domain.Dict;
+import cc.mrbird.system.service.DictService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,16 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
-import cc.mrbird.common.annotation.Log;
-import cc.mrbird.common.controller.BaseController;
-import cc.mrbird.common.domain.QueryRequest;
-import cc.mrbird.common.domain.ResponseBo;
-import cc.mrbird.common.util.FileUtils;
-import cc.mrbird.system.domain.Dict;
-import cc.mrbird.system.service.DictService;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class DictController extends BaseController {
@@ -41,10 +37,7 @@ public class DictController extends BaseController {
     @RequiresPermissions("dict:list")
     @ResponseBody
     public Map<String, Object> dictList(QueryRequest request, Dict dict) {
-        PageHelper.startPage(request.getPageNum(), request.getPageSize());
-        List<Dict> list = this.dictService.findAllDicts(dict, request);
-        PageInfo<Dict> pageInfo = new PageInfo<>(list);
-        return getDataTable(pageInfo);
+        return super.selectByPageNumSize(request, () -> this.dictService.findAllDicts(dict, request));
     }
 
     @RequestMapping("dict/excel")
