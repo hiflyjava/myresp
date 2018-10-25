@@ -53,11 +53,11 @@ public class LogAspect {
         } catch (Throwable e) {
             log.error(e.getMessage());
         }
-        // 执行时长(毫秒)
         // 获取request
         HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
         // 设置IP地址
         String ip = IPUtils.getIpAddr(request);
+        // 执行时长(毫秒)
         long time = System.currentTimeMillis() - beginTime;
         if (febsProperties.isOpenAopLog()) {
             // 保存日志
