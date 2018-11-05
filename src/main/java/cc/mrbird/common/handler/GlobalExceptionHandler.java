@@ -1,6 +1,7 @@
 package cc.mrbird.common.handler;
 
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.exception.FileDownloadException;
 import cc.mrbird.common.exception.LimitAccessException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.session.ExpiredSessionException;
@@ -34,6 +35,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = LimitAccessException.class)
     public ResponseBo handleLimitAccessException(LimitAccessException e) {
+        return ResponseBo.error(e.getMessage());
+    }
+
+    @ExceptionHandler(value = FileDownloadException.class)
+    public ResponseBo handleFileDownloadException(FileDownloadException e) {
         return ResponseBo.error(e.getMessage());
     }
 
