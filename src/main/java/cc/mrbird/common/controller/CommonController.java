@@ -19,7 +19,7 @@ public class CommonController {
 
     @RequestMapping("common/download")
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response) throws IOException, FileDownloadException {
-        if (StringUtils.isNotBlank(fileName) && !fileName.endsWith(".xlsx"))
+        if (StringUtils.isNotBlank(fileName) && !fileName.endsWith(".xlsx") && !fileName.endsWith(".csv"))
             throw new FileDownloadException("不支持该类型文件下载");
         String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf('_') + 1);
         String filePath = "file/" + fileName;
