@@ -32,7 +32,6 @@ public class SqlStatementInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-
         Object returnValue;
         long start = System.currentTimeMillis();
         // 执行 SQL语句
@@ -45,9 +44,8 @@ public class SqlStatementInterceptor implements Interceptor {
             MappedStatement ms = (MappedStatement) args[0];
             Object parameter = null;
             //获取参数，if语句成立，表示sql语句有参数，参数格式是map形式
-            if (args.length > 1) {
+            if (args.length > 1)
                 parameter = invocation.getArgs()[1];
-            }
             // 获取到节点的 id,即 sql语句的 id
             String sqlId = ms.getId();
             // BoundSql就是封装 MyBatis最终产生的 sql类
@@ -82,7 +80,6 @@ public class SqlStatementInterceptor implements Interceptor {
             } else {
                 value = "";
             }
-
         }
         return value;
     }
@@ -99,7 +96,6 @@ public class SqlStatementInterceptor implements Interceptor {
             TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
             if (typeHandlerRegistry.hasTypeHandler(parameterObject.getClass())) {
                 sql = sql.replaceFirst("\\?", Matcher.quoteReplacement(getParameterValue(parameterObject)));
-
             } else {
                 // MetaObject主要是封装了 originalObject对象，提供了 get和 set的方法用于获取和设置 originalObject的属性值
                 // 主要支持对 JavaBean、Collection、Map三种类型对象的操作
