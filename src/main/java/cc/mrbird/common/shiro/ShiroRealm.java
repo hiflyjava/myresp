@@ -13,6 +13,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
  *
  * @author MrBird
  */
+@Component("shiroRealm")
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
@@ -84,6 +86,16 @@ public class ShiroRealm extends AuthorizingRealm {
             throw new LockedAccountException("账号已被锁定,请联系管理员！");
         }
         return new SimpleAuthenticationInfo(user, password, getName());
+    }
+
+    /**
+     * 清除权限缓存
+     * 使用方法：在需要清除用户权限的地方注入 ShiroRealm,
+     * 然后调用其clearCache方法。
+     */
+    public void clearCache() {
+        PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
+        super.clearCache(principals);
     }
 
 }
