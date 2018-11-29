@@ -85,7 +85,7 @@
 
 .daterangepicker.dropdown-menu {
 	max-width: none;
-	z-index: 9;
+	z-index: 1051;
 }
 
 .daterangepicker.single .ranges, .daterangepicker.single .calendar {
