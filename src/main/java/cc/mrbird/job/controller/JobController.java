@@ -4,7 +4,7 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
-import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.common.util.FileUtil;
 import cc.mrbird.job.domain.Job;
 import cc.mrbird.job.service.JobService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -152,7 +152,7 @@ public class JobController extends BaseController {
     public ResponseBo jobExcel(Job job) {
         try {
             List<Job> list = this.jobService.findAllJobs(job);
-            return FileUtils.createExcelByPOIKit("任务表", list, Job.class);
+            return FileUtil.createExcelByPOIKit("任务表", list, Job.class);
         } catch (Exception e) {
             log.error("导出任务信息Excel失败", e);
             return ResponseBo.error("导出Excel失败，请联系网站管理员！");
@@ -164,7 +164,7 @@ public class JobController extends BaseController {
     public ResponseBo jobCsv(Job job) {
         try {
             List<Job> list = this.jobService.findAllJobs(job);
-            return FileUtils.createCsv("任务表", list, Job.class);
+            return FileUtil.createCsv("任务表", list, Job.class);
         } catch (Exception e) {
             log.error("导出任务信息Csv失败", e);
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");

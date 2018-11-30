@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.domain.Tree;
-import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.common.util.FileUtil;
 import cc.mrbird.system.domain.Dept;
 import cc.mrbird.system.service.DeptService;
 
@@ -75,7 +75,7 @@ public class DeptController {
     public ResponseBo deptExcel(Dept dept) {
         try {
             List<Dept> list = this.deptService.findAllDepts(dept);
-            return FileUtils.createExcelByPOIKit("部门表", list, Dept.class);
+            return FileUtil.createExcelByPOIKit("部门表", list, Dept.class);
         } catch (Exception e) {
             log.error("导出部门信息Excel失败", e);
             return ResponseBo.error("导出Excel失败，请联系网站管理员！");
@@ -87,7 +87,7 @@ public class DeptController {
     public ResponseBo deptCsv(Dept dept) {
         try {
             List<Dept> list = this.deptService.findAllDepts(dept);
-            return FileUtils.createCsv("部门表", list, Dept.class);
+            return FileUtil.createCsv("部门表", list, Dept.class);
         } catch (Exception e) {
             log.error("获取部门信息Csv失败", e);
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");

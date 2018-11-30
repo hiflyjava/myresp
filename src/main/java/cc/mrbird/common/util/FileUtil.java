@@ -3,24 +3,21 @@ package cc.mrbird.common.util;
 import cc.mrbird.common.domain.ResponseBo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.FileSystemUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public class FileUtils {
+public class FileUtil {
 
-    private static Logger log = LoggerFactory.getLogger(FileUtils.class);
+    private static Logger log = LoggerFactory.getLogger(FileUtil.class);
 
-    private FileUtils() {
+    private FileUtil() {
 
     }
 

@@ -4,7 +4,7 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
-import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.common.util.FileUtil;
 import cc.mrbird.job.domain.JobLog;
 import cc.mrbird.job.service.JobLogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -59,7 +59,7 @@ public class JobLogController extends BaseController {
 	public ResponseBo jobLogExcel(JobLog jobLog) {
 		try {
 			List<JobLog> list = this.jobLogService.findAllJobLogs(jobLog);
-			return FileUtils.createExcelByPOIKit("调度日志表", list, JobLog.class);
+			return FileUtil.createExcelByPOIKit("调度日志表", list, JobLog.class);
 		} catch (Exception e) {
 			log.error("导出调度日志信息Excel失败", e);
 			return ResponseBo.error("导出Excel失败，请联系网站管理员！");
@@ -71,7 +71,7 @@ public class JobLogController extends BaseController {
 	public ResponseBo jobLogCsv(JobLog jobLog) {
 		try {
 			List<JobLog> list = this.jobLogService.findAllJobLogs(jobLog);
-			return FileUtils.createCsv("调度日志表", list, JobLog.class);
+			return FileUtil.createCsv("调度日志表", list, JobLog.class);
 		} catch (Exception e) {
 			log.error("导出调度日志信息Csv失败", e);
 			return ResponseBo.error("导出Csv失败，请联系网站管理员！");
