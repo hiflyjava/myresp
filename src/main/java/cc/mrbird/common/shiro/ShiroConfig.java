@@ -114,12 +114,6 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    @Bean(name = "lifecycleBeanPostProcessor")
-    public static LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        // shiro 生命周期处理器
-        return new LifecycleBeanPostProcessor();
-    }
-
     @Bean
     public ShiroRealm shiroRealm() {
         // 配置 Realm，需自己实现，见 cc.mrbird.common.shiro.ShiroRealm
@@ -150,20 +144,6 @@ public class ShiroConfig {
         // rememberMe cookie 加密的密钥
         cookieRememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
         return cookieRememberMeManager;
-    }
-
-    /**
-     * DefaultAdvisorAutoProxyCreator 和 AuthorizationAttributeSourceAdvisor 用于开启 shiro 注解的使用
-     * 如 @RequiresAuthentication， @RequiresUser， @RequiresPermissions 等
-     *
-     * @return DefaultAdvisorAutoProxyCreator
-     */
-    @Bean
-    @DependsOn({"lifecycleBeanPostProcessor"})
-    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-        advisorAutoProxyCreator.setProxyTargetClass(true);
-        return advisorAutoProxyCreator;
     }
 
     @Bean
