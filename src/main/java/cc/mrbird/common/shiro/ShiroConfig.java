@@ -59,7 +59,7 @@ public class ShiroConfig {
     private RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
         // 缓存时间，单位为秒
-        redisManager.setExpire(febsProperties.getShiro().getExpireIn());
+        //redisManager.setExpire(febsProperties.getShiro().getExpireIn()); // removed from shiro-redis v3.1.0 api
         redisManager.setHost(host);
         redisManager.setPort(port);
         if (StringUtils.isNotBlank(password))

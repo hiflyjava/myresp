@@ -12,7 +12,7 @@ import java.util.List;
 @CacheConfig(cacheNames = "DictService")
 public interface DictService extends IService<Dict> {
 
-    @Cacheable(key = "#p0.toString()+ #p1.toString()")
+    @Cacheable(key = "#p0.toString() + (#p1 != null ? #p1.toString() : '')")
     List<Dict> findAllDicts(Dict dict, QueryRequest request);
 
     @Cacheable(key = "#p0")
