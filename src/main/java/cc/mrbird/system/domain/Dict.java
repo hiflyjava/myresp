@@ -30,11 +30,11 @@ public class Dict implements Serializable{
 	private String valuee;
 
 	@Column(name = "TABLE_NAME")
-	@ExportConfig(value = "列名")
+	@ExportConfig(value = "表名")
 	private String tableName;
 
 	@Column(name = "FIELD_NAME")
-	@ExportConfig(value = "表名")
+	@ExportConfig(value = "列名")
 	private String fieldName;
 
 	/**
