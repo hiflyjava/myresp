@@ -2,6 +2,8 @@ package cc.mrbird.common.handler;
 
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.exception.LimitAccessException;
+import cc.mrbird.common.util.HttpUtils;
+
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.session.ExpiredSessionException;
 import org.springframework.core.Ordered;
@@ -18,7 +20,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = AuthorizationException.class)
     public Object handleAuthorizationException(HttpServletRequest request) {
-        if (isAjaxRequest(request)) {
+        if (HttpUtils.isAjaxRequest(request)) {
             return ResponseBo.error("暂无权限，请联系管理员！");
         } else {
             ModelAndView mav = new ModelAndView();
@@ -35,11 +37,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = LimitAccessException.class)
     public ResponseBo handleLimitAccessException(LimitAccessException e) {
         return ResponseBo.error(e.getMessage());
-    }
-
-    private static boolean isAjaxRequest(HttpServletRequest request) {
-        return (request.getHeader("X-Requested-With") != null
-                && "XMLHttpRequest".equals(request.getHeader("X-Requested-With")));
     }
 
 }

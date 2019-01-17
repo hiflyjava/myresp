@@ -303,6 +303,17 @@ var $MB = (function () {
         });
     }
 
+    /** 
+     * ajax 拦截 403 状态码
+     */
+    $.ajaxSetup({
+        statusCode: {
+		    403: function (result, status, pearms) {
+	            location.href = ctx;
+		    }
+        }
+    });
+    
     return {
         initTable: function (id, setting) {
             _initTable(id, setting);

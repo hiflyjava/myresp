@@ -27,6 +27,9 @@ import org.springframework.context.annotation.DependsOn;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.servlet.Filter;
 
 /**
  * Shiro 配置类
@@ -76,7 +79,11 @@ public class ShiroConfig {
 
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();        
+        
+        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();//获取filters
+		filters.put("user", new CustomUserFilter());
+		
         // 设置 securityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 登录的 url
@@ -85,6 +92,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSuccessUrl(febsProperties.getShiro().getSuccessUrl());
         // 未授权 url
         shiroFilterFactoryBean.setUnauthorizedUrl(febsProperties.getShiro().getUnauthorizedUrl());
+		
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // 设置免认证 url
         String[] anonUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(febsProperties.getShiro().getAnonUrl(), ",");

@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.*;
+import javax.servlet.http.HttpServletRequest;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -142,6 +144,11 @@ public class HttpUtils {
         public boolean verify(String hostname, SSLSession session) {
            return true;
         }
+    }
+    
+    public static boolean isAjaxRequest(HttpServletRequest request) {
+        return (request.getHeader("X-Requested-With") != null
+                && "XMLHttpRequest".equals(request.getHeader("X-Requested-With")));
     }
 
 }
