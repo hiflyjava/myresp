@@ -13,11 +13,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public class FileUtils {
+public class FileUtil {
 
-    private static Logger log = LoggerFactory.getLogger(FileUtils.class);
+    private static Logger log = LoggerFactory.getLogger(FileUtil.class);
 
-    private FileUtils() {
+    private FileUtil() {
 
     }
 
@@ -113,4 +113,5 @@ public class FileUtils {
             }
         }
     }
+
 }

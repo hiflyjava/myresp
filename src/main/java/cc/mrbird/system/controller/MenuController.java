@@ -4,7 +4,7 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.domain.Tree;
-import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.common.util.FileUtil;
 import cc.mrbird.system.domain.Menu;
 import cc.mrbird.system.service.MenuService;
 import org.apache.commons.lang3.StringUtils;
@@ -113,7 +113,7 @@ public class MenuController extends BaseController {
     public ResponseBo menuExcel(Menu menu) {
         try {
             List<Menu> list = this.menuService.findAllMenus(menu);
-            return FileUtils.createExcelByPOIKit("菜单表", list, Menu.class);
+            return FileUtil.createExcelByPOIKit("菜单表", list, Menu.class);
         } catch (Exception e) {
             logger.error("带出菜单列表Excel失败", e);
             return ResponseBo.error("导出Excel失败，请联系网站管理员！");
@@ -125,7 +125,7 @@ public class MenuController extends BaseController {
     public ResponseBo menuCsv(Menu menu) {
         try {
             List<Menu> list = this.menuService.findAllMenus(menu);
-            return FileUtils.createCsv("菜单表", list, Menu.class);
+            return FileUtil.createCsv("菜单表", list, Menu.class);
         } catch (Exception e) {
             logger.error("导出菜单列表Csv失败", e);
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");

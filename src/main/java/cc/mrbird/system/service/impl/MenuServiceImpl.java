@@ -148,7 +148,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
     @Override
     public List<Map<String, String>> getAllUrl(String p1) {
         RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
-        //获取url与类和方法的对应信息
+        //获取 url与类和方法的对应信息
         Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
         List<Map<String, String>> urlList = new ArrayList<>();
         for (Map.Entry<RequestMappingInfo, HandlerMethod> entry : map.entrySet()) {

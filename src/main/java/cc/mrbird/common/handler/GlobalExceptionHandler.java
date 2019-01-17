@@ -44,5 +44,4 @@ public class GlobalExceptionHandler {
 	public ResponseBo handleFileDownloadException(FileDownloadException e) {
 		return ResponseBo.error(e.getMessage());
 	}
-
 }

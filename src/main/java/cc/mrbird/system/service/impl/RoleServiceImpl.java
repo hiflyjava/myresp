@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -101,13 +102,9 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
     @Override
     public RoleWithMenu findRoleWithMenus(Long roleId) {
         List<RoleWithMenu> list = this.roleMapper.findById(roleId);
-        List<Long> menuList = new ArrayList<>();
-        for (RoleWithMenu rwm : list) {
-            menuList.add(rwm.getMenuId());
-        }
-        if (list.isEmpty()) {
+        List<Long> menuList = list.stream().map(RoleWithMenu::getMenuId).collect(Collectors.toList());
+        if (list.isEmpty())
             return null;
-        }
         RoleWithMenu roleWithMenu = list.get(0);
         roleWithMenu.setMenuIds(menuList);
         return roleWithMenu;

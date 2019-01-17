@@ -1,8 +1,13 @@
 package cc.mrbird.system.controller;
 
-import java.util.List;
-import java.util.Map;
-
+import cc.mrbird.common.annotation.Log;
+import cc.mrbird.common.controller.BaseController;
+import cc.mrbird.common.domain.QueryRequest;
+import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.FileUtil;
+import cc.mrbird.common.util.MD5Utils;
+import cc.mrbird.system.domain.User;
+import cc.mrbird.system.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -13,17 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
-import cc.mrbird.common.annotation.Log;
-import cc.mrbird.common.controller.BaseController;
-import cc.mrbird.common.domain.QueryRequest;
-import cc.mrbird.common.domain.ResponseBo;
-import cc.mrbird.common.util.FileUtils;
-import cc.mrbird.common.util.MD5Utils;
-import cc.mrbird.system.domain.User;
-import cc.mrbird.system.service.UserService;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController extends BaseController {
@@ -70,10 +66,7 @@ public class UserController extends BaseController {
     @RequiresPermissions("user:list")
     @ResponseBody
     public Map<String, Object> userList(QueryRequest request, User user) {
-        PageHelper.startPage(request.getPageNum(), request.getPageSize());
-        List<User> list = this.userService.findUserWithDept(user, request);
-        PageInfo<User> pageInfo = new PageInfo<>(list);
-        return getDataTable(pageInfo);
+        return super.selectByPageNumSize(request, () -> this.userService.findUserWithDept(user, request));
     }
 
     @RequestMapping("user/excel")
@@ -81,7 +74,7 @@ public class UserController extends BaseController {
     public ResponseBo userExcel(User user) {
         try {
             List<User> list = this.userService.findUserWithDept(user, null);
-            return FileUtils.createExcelByPOIKit("用户表", list, User.class);
+            return FileUtil.createExcelByPOIKit("用户表", list, User.class);
         } catch (Exception e) {
             log.error("导出用户信息Excel失败", e);
             return ResponseBo.error("导出Excel失败，请联系网站管理员！");
@@ -93,7 +86,7 @@ public class UserController extends BaseController {
     public ResponseBo userCsv(User user) {
         try {
             List<User> list = this.userService.findUserWithDept(user, null);
-            return FileUtils.createCsv("用户表", list, User.class);
+            return FileUtil.createCsv("用户表", list, User.class);
         } catch (Exception e) {
             log.error("导出用户信息Csv失败", e);
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");

@@ -1,13 +1,12 @@
 package cc.mrbird.common.util;
 
+import org.apache.commons.io.FileUtils;
 import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
 import org.lionsoul.ip2region.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -21,10 +20,13 @@ public class AddressUtils {
 
     public static String getCityInfo(String ip) {
         try {
-            Resource resource = new ClassPathResource("ip2region/ip2region.db");
-            File file = resource.getFile();
+            String dbPath = AddressUtils.class.getResource("/ip2region/ip2region.db").getPath();
+            File file = new File(dbPath);
             if (!file.exists()) {
-                log.error("Error: Invalid ip2region.db file");
+                String tmpDir = System.getProperties().getProperty("java.io.tmpdir");
+                dbPath = tmpDir + "ip.db";
+                file = new File(dbPath);
+                FileUtils.copyInputStreamToFile(AddressUtils.class.getClassLoader().getResourceAsStream("classpath:ip2region/ip2region.db"), file);
             }
             int algorithm = DbSearcher.BTREE_ALGORITHM;
             DbConfig config = new DbConfig();
