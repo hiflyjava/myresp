@@ -1,10 +1,10 @@
 .classpath
 .project
 .settings/
-log/
-target/
+/target/
 .idea/
 project.iml
 sonar-project.properties
 .scannerwork/
-src/main/resouces/application.yml
+*.yml
+*.log
