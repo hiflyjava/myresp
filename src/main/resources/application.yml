@@ -1,16 +1,16 @@
 server:
-  port: 8080
+  port: 8084
   tomcat:
     uri-encoding: utf-8
 spring:
   datasource:
     druid:
-      # 数据库访问配置, 使用druid数据源 
+      # 数据库访问配置, 使用druid数据源  修改能不能提交yml到git
       db-type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/mrbird?useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql://127.0.0.1:3306/smtlkrepo?useUnicode=true&characterEncoding=utf8
       username: root
-      password: root
+      password: x5
       # 连接池配置
       initial-size: 5
       min-idle: 5
