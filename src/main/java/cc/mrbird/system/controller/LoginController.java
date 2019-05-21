@@ -48,12 +48,13 @@ public class LoginController extends BaseController {
     @PostMapping("/login")
     @ResponseBody
     public ResponseBo login(String username, String password, String code, Boolean rememberMe) {
-        if (!StringUtils.isNotBlank(code)) {
+      if (!StringUtils.isNotBlank(code)) {
             return ResponseBo.warn("验证码不能为空！");
         }
+      //测试能不能提交git
         Session session = super.getSession();
-        String sessionCode = (String) session.getAttribute(CODE_KEY);
-        if (!code.equalsIgnoreCase(sessionCode)) {
+     String sessionCode = (String) session.getAttribute(CODE_KEY);
+       if (!code.equalsIgnoreCase(sessionCode)) {
             return ResponseBo.warn("验证码错误！");
         }
         // 密码 MD5 加密

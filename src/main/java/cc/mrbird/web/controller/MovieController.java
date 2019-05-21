@@ -20,7 +20,7 @@ public class MovieController extends BaseController {
 
     @Log("获取热门电影信息")
     @RequestMapping("movie/hot")
-    @RequiresPermissions("movie:hot")
+    @RequiresPermissions("movie:hot") //shiro
     public String movieHot() {
         return "web/movie/hot";
     }

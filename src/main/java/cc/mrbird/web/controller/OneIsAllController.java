@@ -51,7 +51,9 @@ public class OneIsAllController extends BaseController {
     public ResponseBo getOneList() {
         try {
             Long id = Objects.requireNonNull(getIdList()).getData()[0];
-            String data = HttpUtils.sendGet(FebsConstant.ONE_LIST_URL + id + "/0", STATIC_URL);
+           // String data = HttpUtils.sendGet(FebsConstant.ONE_LIST_URL + id + "/0", STATIC_URL);
+            //ONE_ID_LIST_URL
+            String data = HttpUtils.sendGet(FebsConstant.ONE_ID_LIST_URL , STATIC_URL);
             return ResponseBo.ok(data);
         } catch (Exception e) {
             logger.error("获取oneList失败", e);

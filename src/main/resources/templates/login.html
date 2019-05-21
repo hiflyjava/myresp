@@ -21,28 +21,30 @@
 </style>
 <body>
     <!-- Form-->
+   <!--  <img alt="" src="/img/avatar/123.jpg"> -->
     <div class="form">
+    
         <div class="form-toggle"></div>
         <div class="form-panel one">
             <div class="form-header">
                 <h1>账户登录</h1>
             </div>
-            <div class="form-content">
-                <div class="form-group">
-                    <label>用户名</label>
+            <div class="form-content" >
+                <div class="form-group" >
+                    <label style="color: #32c787;">用户名</label>
                     <input type="text" name="username" />
                 </div>
                 <div class="form-group">
-                    <label>密码</label>
+                    <label style="color: #32c787;">密码</label>
                     <input type="password" name="password" />
                 </div>
                 <div class="form-group" style="display:inline-block">
-                    <label>验证码</label>
+                    <label style="color: #32c787;">验证码</label>
                     <input type="text" name="code" style="width:50%; display:inline-block" />
                     <img data-th-src="@{gifCode}" id="validateCodeImg" onclick="reloadCode()" style="display:inline-block" />
                 </div>
                 <div class="form-group" style="margin: 0px;">
-                    <p>
+                    <p style="color: #32c787;">
                         <input type="checkbox" name="rememberme" />&nbsp;&nbsp;记住我</p>
                 </div>
                 <div class="form-group">

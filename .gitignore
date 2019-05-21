@@ -7,3 +7,4 @@ target/
 project.iml
 sonar-project.properties
 .scannerwork/
+src/main/resouces/application.yml
