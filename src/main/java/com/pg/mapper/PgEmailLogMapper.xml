@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pg.mapper.PgEmailLogMapper" >
+  <resultMap id="BaseResultMap" type="com.pg.bean.PgEmailLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="email_info" property="emailInfo" jdbcType="VARCHAR" />
+    <result column="entity_id" property="entityId" jdbcType="INTEGER" />
+    <result column="room_nbr" property="roomNbr" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, email_info, entity_id, room_nbr, create_date, create_by, email, gname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pg_email_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pg_email_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pg.bean.PgEmailLog" >
+    insert into pg_email_log (id, email_info, entity_id, 
+      room_nbr, create_date, create_by, 
+      email, gname)
+    values (#{id,jdbcType=BIGINT}, #{emailInfo,jdbcType=VARCHAR}, #{entityId,jdbcType=INTEGER}, 
+      #{roomNbr,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{gname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pg.bean.PgEmailLog" >
+    insert into pg_email_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="emailInfo != null" >
+        email_info,
+      </if>
+      <if test="entityId != null" >
+        entity_id,
+      </if>
+      <if test="roomNbr != null" >
+        room_nbr,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="emailInfo != null" >
+        #{emailInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null" >
+        #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="roomNbr != null" >
+        #{roomNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pg.bean.PgEmailLog" >
+    update pg_email_log
+    <set >
+      <if test="emailInfo != null" >
+        email_info = #{emailInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null" >
+        entity_id = #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="roomNbr != null" >
+        room_nbr = #{roomNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null" >
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pg.bean.PgEmailLog" >
+    update pg_email_log
+    set email_info = #{emailInfo,jdbcType=VARCHAR},
+      entity_id = #{entityId,jdbcType=INTEGER},
+      room_nbr = #{roomNbr,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      gname = #{gname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="getEmailPage" resultMap="BaseResultMap">
+    SELECT * from pg_email_log pe where pe.entity_id =#{entityId}
+
+    <if test="gname != null and gname !=''" >
+      and pe.gname  like '%${gname}%'
+    </if>
+    <if test="email != null and email !=''" >
+      and pe.email  like '%${email}%'
+    </if>
+    ORDER BY pe.id DESC
+  </select>
+
+</mapper>

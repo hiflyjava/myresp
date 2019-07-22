@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pg.mapper.PgSmtlkDeviceEventLogMapper" >
+  <resultMap id="BaseResultMap" type="com.pg.bean.PgSmtlkDeviceEventLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_acct" property="userAcct" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="event_code" property="eventCode" jdbcType="VARCHAR" />
+    <result column="pwd_id" property="pwdId" jdbcType="INTEGER" />
+    <result column="event_id" property="eventId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="mintime" property="mintime" jdbcType="TIMESTAMP" />
+    <result column="lateMinute" property="lateMinute" jdbcType="BIGINT" />
+
+    <result column="maxtime" property="maxtime" jdbcType="TIMESTAMP" />
+    <result column="earlyMinute" property="earlyMinute" jdbcType="BIGINT" />
+    <result column="addMinute" property="addMinute" jdbcType="BIGINT" />
+    <result column="addTime" property="addTime" jdbcType="VARCHAR" />
+    <result column="endTime" property="endTime" jdbcType="VARCHAR" />
+    <result column="startTime" property="startTime" jdbcType="VARCHAR" />
+    <result column="mmMinute" property="mmMinute" jdbcType="BIGINT" />
+    <result column="sxMinute" property="sxMinute" jdbcType="BIGINT" />
+    <result column="mintimes" property="mintimes" jdbcType="VARCHAR" />
+    <result column="maxtimes" property="maxtimes" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+   </resultMap>
+
+   <resultMap id="StaffsManyDayAttenceOutMap" type="com.pg.common.dto.out.StaffsManyDayAttenceOut">
+     <result column="mintimes" property="mintimes" jdbcType="VARCHAR" />
+     <result column="maxtimes" property="maxtimes" jdbcType="VARCHAR" />
+     <result column="mmMinute" property="mmMinute" jdbcType="BIGINT" />
+     <result column="sxMinute" property="sxMinute" jdbcType="BIGINT" />
+
+   </resultMap>
+
+  <resultMap id="originalAttenceLogOut" type="com.pg.common.dto.out.OriginalAttenceLogOut">
+    <result column="staffId" property="staffId" jdbcType="BIGINT" />
+    <result column="staffName" property="staffName" jdbcType="VARCHAR" />
+    <result column="staffSurname" property="staffSurname" jdbcType="VARCHAR" />
+    <result column="staffNo" property="staffNo" jdbcType="VARCHAR" />
+    <result column="deviceNo" property="deviceNo" jdbcType="VARCHAR" />
+    <result column="dname" property="dname" jdbcType="VARCHAR" />
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="startTime" property="startTime" jdbcType="VARCHAR" />
+    <result column="endTime" property="endTime" jdbcType="VARCHAR" />
+
+    <collection property="originalAttenceDates" ofType="com.pg.common.dto.out.OriginalAttenceDates">
+      <result property="dates" column="dates"/>
+
+
+      <collection property="originalAttenceDatas" ofType="com.pg.common.dto.out.OriginalAttenceDatas">
+        <result property="datas" column="datas"/>
+        <result property="type"  column="type"></result>
+      </collection>
+    </collection>
+  </resultMap>
+
+    <resultMap id="execelOrgAttOut" type="com.pg.common.dto.out.ExecelOrgAttOut">
+        <result column="staffId" property="staffId" jdbcType="BIGINT" />
+        <result column="staffName" property="staffName" jdbcType="VARCHAR" />
+        <result column="staffSurname" property="staffSurname" jdbcType="VARCHAR" />
+        <result column="staffNo" property="staffNo" jdbcType="VARCHAR" />
+        <result column="deviceNo" property="deviceNo" jdbcType="VARCHAR" />
+        <result column="dname" property="dname" jdbcType="VARCHAR" />
+        <result column="pname" property="pname" jdbcType="VARCHAR" />
+         <result property="dates" column="dates"/>
+        <collection property="execelOrgAttDataOuts" ofType="com.pg.common.dto.out.ExecelOrgAttDataOut">
+
+            <result property="datas" column="datas"/>
+            <result property="type"  column="type"></result>
+        </collection>
+    </resultMap>
+
+
+  <resultMap id="depAttenceOut" type="com.pg.common.dto.out.DepAttenceOut">
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="entity_id" property="entityId" jdbcType="INTEGER" />
+    <result column="staffCount" property="staffCount" jdbcType="INTEGER" />
+    <result column="staffCheckCount" property="staffCheckCount" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+
+
+
+  <sql id="Base_Column_List" >
+    id, device_id, user_id, user_acct, time, event_code, pwd_id, event_id, name, status, 
+    created_date, updated_date,type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pg_smtlk_device_event_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.pg.bean.PgSmtlkDeviceEventLog" >
+    delete from pg_smtlk_device_event_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pg.bean.PgSmtlkDeviceEventLog" >
+    insert into pg_smtlk_device_event_log (id, device_id, user_id, 
+      user_acct, time, event_code, 
+      pwd_id, event_id, name, 
+      status, created_date, updated_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{userAcct,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{eventCode,jdbcType=VARCHAR}, 
+      #{pwdId,jdbcType=INTEGER}, #{eventId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pg.bean.PgSmtlkDeviceEventLog" >
+    insert into pg_smtlk_device_event_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userAcct != null" >
+        user_acct,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="eventCode != null" >
+        event_code,
+      </if>
+      <if test="pwdId != null" >
+        pwd_id,
+      </if>
+      <if test="eventId != null" >
+        event_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="updatedDate != null" >
+        updated_date,
+      </if>
+
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userAcct != null" >
+        #{userAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eventCode != null" >
+        #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdId != null" >
+        #{pwdId,jdbcType=INTEGER},
+      </if>
+      <if test="eventId != null" >
+        #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pg.bean.PgSmtlkDeviceEventLog" >
+    update pg_smtlk_device_event_log
+    <set >
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userAcct != null" >
+        user_acct = #{userAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eventCode != null" >
+        event_code = #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdId != null" >
+        pwd_id = #{pwdId,jdbcType=INTEGER},
+      </if>
+      <if test="eventId != null" >
+        event_id = #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pg.bean.PgSmtlkDeviceEventLog" >
+    update pg_smtlk_device_event_log
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_acct = #{userAcct,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      event_code = #{eventCode,jdbcType=VARCHAR},
+      pwd_id = #{pwdId,jdbcType=INTEGER},
+      event_id = #{eventId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      updated_date = #{updatedDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--查询当前公司迟到人数和迟到的时间-->
+  <select id="getStaffAttenceByOneDay" resultMap="BaseResultMap">
+
+    select dd.*,
+    TIMESTAMPDIFF(MINUTE,(dd.endTime),dd.maxtime)  as earlyMinute,
+    TIMESTAMPDIFF(MINUTE,( dd.startTime),dd.mintime)  as lateMinute,
+    TIMESTAMPDIFF(MINUTE,(dd.addTime),dd.maxtime)  as addMinute
+    from
+    (
+    SELECT
+    p.id,
+    p.name,
+    CONCAT(#{todayDate},' ',p.addTime)  as addTime,
+    CONCAT(#{todayDate},' ',p.startTime) as startTime,
+    CONCAT(#{todayDate},' ',p.endTime) as endTime,
+    max(d.time) as maxtime,
+    min(d.time) as mintime
+    from pg_staff p
+    INNER join  pg_smtlk_device_event_log d on p.id =d.user_id
+    where
+     (d.time &lt;  #{endToday} and d.time &gt;=  #{startToday})
+    <if test="staffId != null and staffId != '' ">
+      and d.user_id=#{staffId}
+    </if>
+    <if test="departmentId != null and departmentId != '' ">
+      and p.department_id in( select id from  department where FIND_IN_SET(id,getChildrenDep(#{departmentId})) and entity_id =#{entityId})
+    </if>
+
+    and p.entity_id =#{entityId} GROUP BY p.id
+    )dd
+  </select>
+
+  <!--查询当天或者范围时间内的打卡记录-->
+  <select id="getClockLogByDays" resultMap="BaseResultMap">
+    SELECT
+    p.id,
+    p.name,
+    d.time,d.event_code
+    from pg_staff p
+    INNER join  pg_smtlk_device_event_log d on p.id =d.user_id
+    where  (d.time &lt; #{endToday} and d.time &gt;= #{startToday})  and p.entity_id =#{entityId} ORDER BY d.time DESC
+  </select>
+
+  <!--查询当天公司每个员工打卡方式的记录-->
+  <select id="getClockTypeLogByToday" resultMap="BaseResultMap">
+    SELECT  distinct tt.id,tt.name,tt.tTime,tt.event_code from (
+    SELECT
+    p.id,
+    p.name,
+    d.time,
+    LEFT(d.time,10) as tTime,
+    d.event_code
+    from pg_staff p
+    INNER join  pg_smtlk_device_event_log d on p.id =d.user_id
+    where  (d.time &lt; #{endToday} and d.time  &gt;= #{startToday})  and p.entity_id =#{entityId} ORDER BY d.time DESC  )tt
+  </select>
+
+  <!--查询一个人一段时间的考勤统计-->
+  <select id="getOneStaffAttenceByDays" resultMap="StaffsManyDayAttenceOutMap">
+    select dd.*,
+    TIMESTAMPDIFF(MINUTE,(dd.mintimes),dd.maxtimes)  as mmMinute  ,
+    TIMESTAMPDIFF(MINUTE,(dd.mintimes),dd.startTime)  as sxMinute
+    from
+    (
+    select
+    d.user_id,
+    d.time,
+    MAX(d.time) as maxtimes,
+    min(d.time) as  mintimes,
+    CONCAT(#{todayDate},' ',p.addTime)  as addTime,
+    CONCAT(#{todayDate},' ',p.startTime) as startTime,
+    CONCAT(#{todayDate},' ',p.endTime) as endTime
+    from   pg_smtlk_device_event_log d INNER join pg_staff p on  d.user_id =p.id
+    where d.user_id =#{staffId} and (d.time  &lt; #{endTime} and d.time &gt;= #{startTime}))dd
+
+  </select>
+
+  <!--查询原始记录表-->
+  <select id="getOriginalAttenceLog" resultMap="originalAttenceLogOut">
+
+
+          SELECT
+          a.name as staffName,
+          a.id as staffId,
+          a.user_no as staffNo,
+          a.surname as staffSurname,
+          a.startTime,
+          a.endTime,
+          b.name as dname,
+          d.name as pname,
+          DATE_FORMAT(c.time,'%Y-%m-%d') as dates,
+          DATE_FORMAT(c.time,'%H:%i') as datas,
+          c.type
+          from pg_staff a
+          LEFT join  department b on a.department_id =b.id
+          left join  pg_smtlk_device_event_log c on  c.user_id = a.id
+          left join  position  d on d.id =a.position_id
+    where
+
+            a.entity_id=#{entityId}
+            <if test="depPath !=null and depPath !=''">
+            and  b.depPath like '%${depPath}%'
+            </if>
+
+            <if test="staffName !=null and staffName !=''">
+              and  a.name like '%${staffName}%'
+            </if>
+             and (c.time   &lt; #{endTime} and c.time &gt;= #{startTime})
+      ORDER BY staffId,dates,datas asc
+
+  </select>
+
+
+    <!--查询原始记录表-->
+    <select id="getExecelOrgAttOut" resultMap="execelOrgAttOut">
+
+
+        SELECT
+        a.name as staffName,
+        a.id as staffId,
+        a.user_no as staffNo,
+        a.surname as staffSurname,
+        b.name as dname,
+        d.name as pname,
+        DATE_FORMAT(c.time,'%Y-%m-%d') as dates,
+        DATE_FORMAT(c.time,'%H:%i') as datas,
+        c.type
+        from pg_staff a
+        LEFT join  department b on a.department_id =b.id
+        left join  pg_smtlk_device_event_log c on  c.user_id = a.id
+        left join  position  d on d.id =a.position_id
+        where
+
+        a.entity_id=#{entityId}
+        <if test="depPath !=null and depPath !=''">
+            and  b.depPath like '%${depPath}%'
+        </if>
+
+        <if test="staffName !=null and staffName !=''">
+            and  a.name like '%${staffName}%'
+        </if>
+        and (c.time   &lt; #{endTime} and c.time &gt;= #{startTime})
+        ORDER BY staffId,dates,datas asc
+
+    </select>
+
+
+  <!--查询各个部门总人数和实际打卡的人数-->
+
+  <select id="getDepAttenceOut" resultMap="depAttenceOut">
+
+    select hh.*,
+
+    IFNULL(jj.staffCheckCount,0) as staffCheckCount
+
+    from
+
+
+    (select
+    b.*,
+    count(a.id) as staffCount
+
+    from department b
+    left join pg_staff a on  a.department_id =b.id
+
+    where  b.isParent =0 and b.entity_id =#{entityId}
+    GROUP BY b.id) hh
+    left join
+    (SELECT
+    m.* ,
+    count(m.id) as staffCheckCount
+    from
+    (
+    select
+    b.*,
+    a.name as staffname,
+    a.id as userid,
+    c.time
+    from department b
+    left join pg_staff a on  a.department_id =b.id
+    left join  pg_smtlk_device_event_log c  on a.id =c.user_id
+    where  b.isParent =0 and b.entity_id =#{entityId} and  (c.time   &lt; #{endTime} and c.time &gt;= #{startTime})
+    GROUP BY userid) m
+    GROUP BY m.id) jj
+    on hh.id =jj.id
+
+  </select>
+
+
+  <!--查询某个人一段时间补的卡列表-->
+  <select id="getOneStaffTimesLog" resultMap="BaseResultMap">
+    select c.* from
+    pg_smtlk_device_event_log c where   (c.time   &lt; #{endTime} and c.time &gt;= #{startTime}) and c.user_id =#{userId} and c.type =2
+
+  </select>
+
+
+</mapper>

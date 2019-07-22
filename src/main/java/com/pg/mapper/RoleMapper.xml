@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pg.mapper.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.pg.bean.Role">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="nameZh" property="nameZh"/>
+
+    </resultMap>
+
+    <select id="roles" resultType="com.pg.bean.Role">
+        SELECT * FROM role where id!=6;
+    </select>
+    <insert id="addNewRole" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO role (name,nameZh) VALUES(#{name},#{nameZh})
+    </insert>
+
+    <select id="getRoleById" resultType="com.pg.bean.Role">
+        SELECT * FROM role where id=#{id};
+    </select>
+    <select id="getRoleList" resultType="com.pg.bean.Role">
+        select  * from  role   where id!=6;
+    </select>
+
+    <update id="updateRoleById" parameterType="com.pg.bean.Role">
+        update role
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nameZh != null">
+                nameZh = #{nameZh,jdbcType=CHAR}
+            </if>
+            where  id =#{id}
+        </set>
+
+    </update>
+
+    <delete id="deleteRoleById" parameterType="Long">
+        DELETE FROM role WHERE id=#{rid}
+    </delete>
+</mapper>

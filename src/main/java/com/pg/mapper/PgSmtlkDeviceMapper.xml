@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pg.mapper.PgSmtlkDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.pg.bean.PgSmtlkDevice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_acct" property="userAcct" jdbcType="VARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="master_code" property="masterCode" jdbcType="VARCHAR" />
+    <result column="host_code" property="hostCode" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="fw_version" property="fwVersion" jdbcType="VARCHAR" />
+    <result column="current_ver_num" property="currentVerNum" jdbcType="SMALLINT" />
+    <result column="time_zone" property="timeZone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="inactive" property="inactive" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="last_syn_date" property="lastSynDate" jdbcType="TIMESTAMP" />
+    <result column="last_query_date" property="lastQueryDate" jdbcType="TIMESTAMP" />
+    <result column="query_cnt" property="queryCnt" jdbcType="SMALLINT" />
+    <result column="hub_id" property="hubId" jdbcType="VARCHAR" />
+    <result column="mac_addr" property="macAddr" jdbcType="VARCHAR" />
+    <result column="shared_admin" property="sharedAdmin" jdbcType="VARCHAR" />
+    <result column="auto_lock" property="autoLock" jdbcType="SMALLINT" />
+    <result column="audio" property="audio" jdbcType="VARCHAR" />
+    <result column="pin_crazy" property="pinCrazy" jdbcType="VARCHAR" />
+    <result column="serial_num" property="serialNum" jdbcType="VARCHAR" />
+    <result column="sales_channel" property="salesChannel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_acct, device_id, master_code, host_code, name, model, fw_version, 
+    current_ver_num, time_zone, status, inactive, created_date, updated_date, last_syn_date, 
+    last_query_date, query_cnt, hub_id, mac_addr, shared_admin, auto_lock, audio, pin_crazy, 
+    serial_num, sales_channel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pg_smtlk_device
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pg_smtlk_device
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pg.bean.PgSmtlkDevice" >
+    insert into pg_smtlk_device (id, user_id, user_acct, 
+      device_id, master_code, host_code, 
+      name, model, fw_version, 
+      current_ver_num, time_zone, status, 
+      inactive, created_date, updated_date, 
+      last_syn_date, last_query_date, query_cnt, 
+      hub_id, mac_addr, shared_admin, 
+      auto_lock, audio, pin_crazy, 
+      serial_num, sales_channel)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userAcct,jdbcType=VARCHAR}, 
+      #{deviceId,jdbcType=VARCHAR}, #{masterCode,jdbcType=VARCHAR}, #{hostCode,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{fwVersion,jdbcType=VARCHAR}, 
+      #{currentVerNum,jdbcType=SMALLINT}, #{timeZone,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{inactive,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP}, 
+      #{lastSynDate,jdbcType=TIMESTAMP}, #{lastQueryDate,jdbcType=TIMESTAMP}, #{queryCnt,jdbcType=SMALLINT}, 
+      #{hubId,jdbcType=VARCHAR}, #{macAddr,jdbcType=VARCHAR}, #{sharedAdmin,jdbcType=VARCHAR}, 
+      #{autoLock,jdbcType=SMALLINT}, #{audio,jdbcType=VARCHAR}, #{pinCrazy,jdbcType=VARCHAR}, 
+      #{serialNum,jdbcType=VARCHAR}, #{salesChannel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pg.bean.PgSmtlkDevice" >
+    insert into pg_smtlk_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userAcct != null" >
+        user_acct,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="masterCode != null" >
+        master_code,
+      </if>
+      <if test="hostCode != null" >
+        host_code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="fwVersion != null" >
+        fw_version,
+      </if>
+      <if test="currentVerNum != null" >
+        current_ver_num,
+      </if>
+      <if test="timeZone != null" >
+        time_zone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="inactive != null" >
+        inactive,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="updatedDate != null" >
+        updated_date,
+      </if>
+      <if test="lastSynDate != null" >
+        last_syn_date,
+      </if>
+      <if test="lastQueryDate != null" >
+        last_query_date,
+      </if>
+      <if test="queryCnt != null" >
+        query_cnt,
+      </if>
+      <if test="hubId != null" >
+        hub_id,
+      </if>
+      <if test="macAddr != null" >
+        mac_addr,
+      </if>
+      <if test="sharedAdmin != null" >
+        shared_admin,
+      </if>
+      <if test="autoLock != null" >
+        auto_lock,
+      </if>
+      <if test="audio != null" >
+        audio,
+      </if>
+      <if test="pinCrazy != null" >
+        pin_crazy,
+      </if>
+      <if test="serialNum != null" >
+        serial_num,
+      </if>
+      <if test="salesChannel != null" >
+        sales_channel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userAcct != null" >
+        #{userAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="masterCode != null" >
+        #{masterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hostCode != null" >
+        #{hostCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fwVersion != null" >
+        #{fwVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="currentVerNum != null" >
+        #{currentVerNum,jdbcType=SMALLINT},
+      </if>
+      <if test="timeZone != null" >
+        #{timeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="inactive != null" >
+        #{inactive,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastSynDate != null" >
+        #{lastSynDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastQueryDate != null" >
+        #{lastQueryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="queryCnt != null" >
+        #{queryCnt,jdbcType=SMALLINT},
+      </if>
+      <if test="hubId != null" >
+        #{hubId,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddr != null" >
+        #{macAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="sharedAdmin != null" >
+        #{sharedAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="autoLock != null" >
+        #{autoLock,jdbcType=SMALLINT},
+      </if>
+      <if test="audio != null" >
+        #{audio,jdbcType=VARCHAR},
+      </if>
+      <if test="pinCrazy != null" >
+        #{pinCrazy,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNum != null" >
+        #{serialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="salesChannel != null" >
+        #{salesChannel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pg.bean.PgSmtlkDevice" >
+    update pg_smtlk_device
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userAcct != null" >
+        user_acct = #{userAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="masterCode != null" >
+        master_code = #{masterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hostCode != null" >
+        host_code = #{hostCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fwVersion != null" >
+        fw_version = #{fwVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="currentVerNum != null" >
+        current_ver_num = #{currentVerNum,jdbcType=SMALLINT},
+      </if>
+      <if test="timeZone != null" >
+        time_zone = #{timeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="inactive != null" >
+        inactive = #{inactive,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastSynDate != null" >
+        last_syn_date = #{lastSynDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastQueryDate != null" >
+        last_query_date = #{lastQueryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="queryCnt != null" >
+        query_cnt = #{queryCnt,jdbcType=SMALLINT},
+      </if>
+      <if test="hubId != null" >
+        hub_id = #{hubId,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddr != null" >
+        mac_addr = #{macAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="sharedAdmin != null" >
+        shared_admin = #{sharedAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="autoLock != null" >
+        auto_lock = #{autoLock,jdbcType=SMALLINT},
+      </if>
+      <if test="audio != null" >
+        audio = #{audio,jdbcType=VARCHAR},
+      </if>
+      <if test="pinCrazy != null" >
+        pin_crazy = #{pinCrazy,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNum != null" >
+        serial_num = #{serialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="salesChannel != null" >
+        sales_channel = #{salesChannel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pg.bean.PgSmtlkDevice" >
+    update pg_smtlk_device
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_acct = #{userAcct,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      master_code = #{masterCode,jdbcType=VARCHAR},
+      host_code = #{hostCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      fw_version = #{fwVersion,jdbcType=VARCHAR},
+      current_ver_num = #{currentVerNum,jdbcType=SMALLINT},
+      time_zone = #{timeZone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      inactive = #{inactive,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      last_syn_date = #{lastSynDate,jdbcType=TIMESTAMP},
+      last_query_date = #{lastQueryDate,jdbcType=TIMESTAMP},
+      query_cnt = #{queryCnt,jdbcType=SMALLINT},
+      hub_id = #{hubId,jdbcType=VARCHAR},
+      mac_addr = #{macAddr,jdbcType=VARCHAR},
+      shared_admin = #{sharedAdmin,jdbcType=VARCHAR},
+      auto_lock = #{autoLock,jdbcType=SMALLINT},
+      audio = #{audio,jdbcType=VARCHAR},
+      pin_crazy = #{pinCrazy,jdbcType=VARCHAR},
+      serial_num = #{serialNum,jdbcType=VARCHAR},
+      sales_channel = #{salesChannel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

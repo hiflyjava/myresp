@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pg.mapper.PgshRoomCustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.pg.bean.PgshRoomCustomer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="SMALLINT" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="times" property="times" jdbcType="INTEGER" />
+    <result column="timess" property="timess" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="id_type" property="idType" jdbcType="INTEGER" />
+    <result column="phone_type" property="phoneType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, telephone, gender, id_card, room_id, create_date, update_date, status,
+    eid,  times,email,country,id_type,phone_type
+  </sql>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap"   >
+    select 
+    *
+    from pgsh_room_customer
+    where id = #{id}
+  </select>
+
+
+<!--查询是否已经登记入住-->
+  <select id="selectByIdCard" resultMap="BaseResultMap"   >
+    select
+    <include refid="Base_Column_List" />
+    from pgsh_room_customer
+    where id_card = #{idCard}
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pgsh_room_customer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pg.bean.PgshRoomCustomer" >
+    insert into pgsh_room_customer (id, name, telephone, 
+      gender, id_card, room_id, 
+      create_date, update_date, status, 
+      eid,  times,email
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=SMALLINT}, #{idCard,jdbcType=VARCHAR}, #{roomId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{eid,jdbcType=INTEGER}, #{times,jdbcType=INTEGER },#{email,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.pg.bean.PgshRoomCustomer" >
+    insert into pgsh_room_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+
+      <if test="times != null" >
+        times,
+      </if>
+
+      <if test="email != null" >
+        email,
+      </if>
+
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="idType != null" >
+        id_type,
+      </if>
+      <if test="phoneType != null" >
+        phone_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=SMALLINT},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+
+      <if test="times != null" >
+        #{times,jdbcType=INTEGER},
+      </if>
+
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+      #{idType,jdbcType=INTEGER},
+    </if>
+      <if test="phoneType != null" >
+        #{phoneType,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pg.bean.PgshRoomCustomer" >
+    update pgsh_room_customer
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=SMALLINT},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+
+      <if test="times != null" >
+        times = #{times,jdbcType=INTEGER},
+      </if>
+
+      <if test="email != null" >
+        email= #{email,jdbcType=VARCHAR},
+      </if>
+
+      <if test="country != null" >
+        country= #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+        id_type= #{idType,jdbcType=INTEGER},
+      </if>
+
+      <if test="phoneType != null" >
+        phone_type= #{phoneType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pg.bean.PgshRoomCustomer" >
+    update pgsh_room_customer
+    set name = #{name,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=SMALLINT},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      room_id = #{roomId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      eid = #{eid,jdbcType=INTEGER},
+
+      times = #{times,jdbcType=INTEGER},
+       email= #{email,jdbcType=VARCHAR},
+        country= #{country,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--查询guest-->
+  <select id="getAllCustomersByItems" resultMap="BaseResultMap">
+
+      <!-- SELECT rc.* from (
+
+
+        select phe.hotel_entity_id from pg_hr_entity  phe  where  phe.hr_id=#{hrid}) heids
+
+        INNER join pgsh_room_customer rc on rc.eid =heids.hotel_entity_id
+
+    <where>
+
+      <if test="eid!= null and eid !=''">
+        heids.hotel_entity_id =#{eid}
+      </if>
+
+      <if test="times!= null and times !='' and times==1">
+        and rc.times =#{times}
+      </if>
+      <if test="times!= null and times !='' and times ==2 ">
+        and  rc.times >1
+      </if>
+      <if test="name!= null and name !=''">
+        and rc.name  LIKE '%${name}%'
+      </if>
+
+      <if test="telephone!= null and telephone !=''">
+        and  rc.telephone like '%${telephone}%'
+      </if>
+    </where>-->
+
+
+    SELECT zz.*, (case times when 1 then "2" end )  timess from (
+    select prc.*
+    from pgsh_order po INNER join pgsh_order_customer poc on poc.order_id =po.id
+    INNER join pgsh_room_customer prc  on prc.id =poc.customer_id
+    where prc.eid =#{eid}) zz
+
+    <where>
+      <if test="name!= null and name !=''">
+        zz.name  LIKE '%${name}%'
+      </if>
+      <if test="telephone!= null and telephone !=''">
+        and  zz.telephone like '%${telephone}%'
+      </if>
+
+      <if test="idCard!= null and idCard !=''">
+        and  zz.id_card like '%${idCard}%'
+      </if>
+    </where>
+
+    UNION
+   select ppp.* from(
+    select pp.*,(case times when 1 then "1" end )  timess  from  pgsh_room_customer pp  where pp.eid =#{eid} and pp.id not in
+    (select prc.id
+    from pgsh_order po INNER join pgsh_order_customer poc on poc.order_id =po.id
+    INNER join pgsh_room_customer prc  on prc.id =poc.customer_id
+    where prc.eid =#{eid})) ppp
+    <where>
+      <if test="name!= null and name !=''">
+        ppp.name  LIKE '%${name}%'
+      </if>
+      <if test="telephone!= null and telephone !=''">
+        and  ppp.telephone like '%${telephone}%'
+      </if>
+
+      <if test="idCard!= null and idCard !=''">
+        and  ppp.id_card like '%${idCard}%'
+      </if>
+    </where>
+
+
+  </select>
+
+</mapper>

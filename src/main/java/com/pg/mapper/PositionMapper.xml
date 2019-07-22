@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pg.mapper.PositionMapper" >
+  <resultMap id="BaseResultMap" type="com.pg.bean.Position" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="enabled" property="enabled" jdbcType="BIT" />
+    <result column="entity_id" property="entityId" jdbcType="INTEGER" />
+    <result column="startTime" property="startTime" jdbcType="VARCHAR" />
+    <result column="did" property="did" jdbcType="INTEGER" />
+    <result column="endTime" property="endTime" jdbcType="VARCHAR" />
+    <result column="createBy" property="createby" jdbcType="VARCHAR" />
+    <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="updateBy" property="updateby" jdbcType="VARCHAR" />
+    <result column="addTime" property="addTime" jdbcType="VARCHAR" />
+    <result column="dname" property="dname" jdbcType="VARCHAR"></result>
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, createDate, enabled, entity_id, startTime, did, endTime, createBy, updateDate,
+    updateBy, addTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pg.bean.Position" >
+    insert into position (id, name, createDate,
+      enabled, entity_id, startTime,
+      did, endTime, createBy,
+      updateDate, updateBy, addTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP},
+      #{enabled,jdbcType=BIT}, #{entityId,jdbcType=INTEGER}, #{starttime,jdbcType=VARCHAR},
+      #{did,jdbcType=INTEGER}, #{endtime,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR},
+      #{updatedate,jdbcType=TIMESTAMP}, #{updateby,jdbcType=VARCHAR}, #{addtime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pg.bean.Position" >
+    insert into position
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="entityId != null" >
+        entity_id,
+      </if>
+      <if test="startTime != null" >
+        startTime,
+      </if>
+      <if test="did != null" >
+        did,
+      </if>
+      <if test="endTime != null" >
+        endTime,
+      </if>
+      <if test="createby != null" >
+        createBy,
+      </if>
+      <if test="updatedate != null" >
+        updateDate,
+      </if>
+      <if test="updateby != null" >
+        updateBy,
+      </if>
+      <if test="addTime != null" >
+        addTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="entityId != null" >
+        #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null" >
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pg.bean.Position" >
+    update position
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="entityId != null" >
+        entity_id = #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        startTime = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="did != null" >
+        did = #{did,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        endTime = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        updateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null" >
+        updateBy = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        addTime = #{addTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pg.bean.Position" >
+    update position
+    set name = #{name,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      enabled = #{enabled,jdbcType=BIT},
+      entity_id = #{entityId,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=VARCHAR},
+      did = #{did,jdbcType=INTEGER},
+      endTime = #{endtime,jdbcType=VARCHAR},
+      createBy = #{createby,jdbcType=VARCHAR},
+      updateDate = #{updatedate,jdbcType=TIMESTAMP},
+      updateBy = #{updateby,jdbcType=VARCHAR},
+      addTime = #{addtime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--查询当前公司拥有的岗位-->
+  <select id="getPositionListByEid" resultMap="BaseResultMap">
+    SELECT de.*,d.name as dname from position	 de
+    inner join  department  d  on d.id = de.did
+    INNER join
+    (SELECT  he.hotel_entity_id from  pg_user_entity he
+    INNER join user r on r.id =he.hr_id where r.id= #{uid}) pghe
+    on pghe.hotel_entity_id =de.entity_id
+
+    where de.entity_id =#{entityId}
+    <if test="name != null and  name !=''" >
+      and de.name like  '%${name}%'
+    </if>
+  </select>
+
+  <select id="getChildrenDepsPosition"  parameterType="com.pg.bean.TDepartment" resultMap="BaseResultMap">
+
+  select
+  p.*
+  from position p
+  INNER join  department d on p.did =d.id
+  where
+  p.entity_id =#{entityId}
+  <if test="depPath != null and  depPath !=''" >
+    and d.depPath LIKE '%${depPath}%'
+  </if>
+  </select>
+
+
+</mapper>

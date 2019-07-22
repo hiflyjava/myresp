@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pg.mapper.PgStaffAttenceMapper" >
+  <resultMap id="BaseResultMap" type="com.pg.bean.PgStaffAttence" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="staff_id" property="staffId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="today_date" property="todayDate" jdbcType="DATE" />
+    <result column="isLate" property="islate" jdbcType="INTEGER" />
+    <result column="late_time" property="lateTime" jdbcType="BIGINT" />
+    <result column="isEarly" property="isearly" jdbcType="INTEGER" />
+    <result column="early_time" property="earlyTime" jdbcType="BIGINT" />
+    <result column="isAdd" property="isadd" jdbcType="INTEGER" />
+    <result column="add_time" property="addTime" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="extend1" property="extend1" jdbcType="VARCHAR" />
+    <result column="extend2" property="extend2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, staff_id, status, startTime, endTime, today_date, isLate, late_time, isEarly, 
+    early_time, isAdd, add_time, type, create_by, create_date, update_by, update_date, 
+    extend1, extend2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pg_staff_attence
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pg_staff_attence
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pg.bean.PgStaffAttence" >
+    insert into pg_staff_attence (id, staff_id, status, 
+      startTime, endTime, today_date, 
+      isLate, late_time, isEarly, 
+      early_time, isAdd, add_time, 
+      type, create_by, create_date, 
+      update_by, update_date, extend1, 
+      extend2)
+    values (#{id,jdbcType=BIGINT}, #{staffId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER},
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{todayDate,jdbcType=DATE}, 
+      #{islate,jdbcType=INTEGER}, #{lateTime,jdbcType=BIGINT}, #{isearly,jdbcType=INTEGER}, 
+      #{earlyTime,jdbcType=BIGINT}, #{isadd,jdbcType=INTEGER}, #{addTime,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{extend1,jdbcType=VARCHAR}, 
+      #{extend2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pg.bean.PgStaffAttence" >
+    insert into pg_staff_attence
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="todayDate != null" >
+        today_date,
+      </if>
+      <if test="islate != null" >
+        isLate,
+      </if>
+      <if test="lateTime != null" >
+        late_time,
+      </if>
+      <if test="isearly != null" >
+        isEarly,
+      </if>
+      <if test="earlyTime != null" >
+        early_time,
+      </if>
+      <if test="isadd != null" >
+        isAdd,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="extend1 != null" >
+        extend1,
+      </if>
+      <if test="extend2 != null" >
+        extend2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="todayDate != null" >
+        #{todayDate,jdbcType=DATE},
+      </if>
+      <if test="islate != null" >
+        #{islate,jdbcType=INTEGER},
+      </if>
+      <if test="lateTime != null" >
+        #{lateTime,jdbcType=BIGINT},
+      </if>
+      <if test="isearly != null" >
+        #{isearly,jdbcType=INTEGER},
+      </if>
+      <if test="earlyTime != null" >
+        #{earlyTime,jdbcType=BIGINT},
+      </if>
+      <if test="isadd != null" >
+        #{isadd,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null" >
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pg.bean.PgStaffAttence" >
+    update pg_staff_attence
+    <set >
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="todayDate != null" >
+        today_date = #{todayDate,jdbcType=DATE},
+      </if>
+      <if test="islate != null" >
+        isLate = #{islate,jdbcType=INTEGER},
+      </if>
+      <if test="lateTime != null" >
+        late_time = #{lateTime,jdbcType=BIGINT},
+      </if>
+      <if test="isearly != null" >
+        isEarly = #{isearly,jdbcType=INTEGER},
+      </if>
+      <if test="earlyTime != null" >
+        early_time = #{earlyTime,jdbcType=BIGINT},
+      </if>
+      <if test="isadd != null" >
+        isAdd = #{isadd,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend1 != null" >
+        extend1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pg.bean.PgStaffAttence" >
+    update pg_staff_attence
+    set staff_id = #{staffId,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      today_date = #{todayDate,jdbcType=DATE},
+      isLate = #{islate,jdbcType=INTEGER},
+      late_time = #{lateTime,jdbcType=BIGINT},
+      isEarly = #{isearly,jdbcType=INTEGER},
+      early_time = #{earlyTime,jdbcType=BIGINT},
+      isAdd = #{isadd,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      extend1 = #{extend1,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

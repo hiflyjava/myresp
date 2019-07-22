@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pg.mapper.PgshHotelEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.pg.bean.PgshHotelEntity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ref_nbr" property="refNbr" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
+    <result column="time_id" property="timeId" jdbcType="INTEGER" />
+
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="VARCHAR" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ref_nbr, name, status, address, remark, created_date, updated_date, created_by, 
+    updated_by,time_id, start_time, end_time, add_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pgsh_hotel_entity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pgsh_hotel_entity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pg.bean.PgshHotelEntity" >
+    insert into pgsh_hotel_entity (id, ref_nbr, name, 
+      status, address, remark, 
+      created_date, updated_date, created_by, 
+      updated_by, uid)
+    values (#{id,jdbcType=BIGINT}, #{refNbr,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, 
+      #{updatedBy,jdbcType=VARCHAR}, #{uid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pg.bean.PgshHotelEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
+    insert into pgsh_hotel_entity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="refNbr != null" >
+        ref_nbr,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="updatedDate != null" >
+        updated_date,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="timeId != null" >
+        time_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="refNbr != null" >
+        #{refNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="timeId != null" >
+        #{timeId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pg.bean.PgshHotelEntity" >
+    update pgsh_hotel_entity
+    <set >
+      <if test="refNbr != null" >
+        ref_nbr = #{refNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="timeId != null" >
+        time_id = #{timeId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pg.bean.PgshHotelEntity" >
+    update pgsh_hotel_entity
+    set ref_nbr = #{refNbr,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      updated_by = #{updatedBy,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+     <select id="getAllHotelList" resultMap="BaseResultMap">
+       select * from  pgsh_hotel_entity
+     </select>
+
+
+
+      <select id="getOwnHotelList" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *  from  pgsh_hotel_entity p where p.uid =#{id ,jdbcType=BIGINT}
+      </select>
+
+
+  <!--只能一个用户管理一hotel-->
+  <select id="selectByEid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select *  from  pgsh_hotel_entity p where p.id =#{id ,jdbcType=BIGINT}
+      </select>
+
+  <!--查询当前用户所管辖的宾馆-->
+  <select id="selectHotelByUid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+
+
+			 select he.* from pg_user_entity hre
+
+              INNER join  pgsh_hotel_entity he  on hre.hotel_entity_id =he.id
+
+
+			   where hre.hr_id =#{uid}
+
+      </select>
+
+
+
+
+  <!--根据办公室id查询办公室详情-->
+  <select id="selectHotelByEid" resultMap="BaseResultMap" >
+
+
+    select he.*,wt.start_time,wt.end_time,wt.add_time from pg_user_entity hre
+
+    INNER join  pgsh_hotel_entity he  on hre.hotel_entity_id =he.id
+
+    INNER join  pg_work_time wt  on wt.id =he.time_id
+    where hre.hr_id =#{userId}
+
+    <if test="eid!= null and eid !=''">
+      and he.id = #{eid}
+    </if>
+
+  </select>
+
+
+  <select id="searchHotelByItems" resultMap="BaseResultMap" parameterType="com.pg.common.dto.in.HotelIn">
+         select he.* from pg_user_entity hre INNER join  pgsh_hotel_entity he  on hre.hotel_entity_id =he.id
+			  <where>
+                <if test="uid!= null and uid !=''">
+                  hre.hr_id =#{uid}
+                </if>
+                <if test="name!= null and name !=''">
+                  and he.name like '%${name}%'
+                </if>
+
+              </where>
+      </select>
+</mapper>

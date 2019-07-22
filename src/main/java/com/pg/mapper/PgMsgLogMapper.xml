@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pg.mapper.PgMsgLogMapper" >
+  <resultMap id="BaseResultMap" type="com.pg.bean.PgMsgLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="msg_info" property="msgInfo" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="entity_id" property="entityId" jdbcType="INTEGER" />
+    <result column="room_nbr" property="roomNbr" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, msg_info, create_date, create_by, entity_id, room_nbr, phone, gname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pg_msg_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pg_msg_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pg.bean.PgMsgLog" >
+    insert into pg_msg_log (id, msg_info, create_date, 
+      create_by, entity_id, room_nbr, 
+      phone, gname)
+    values (#{id,jdbcType=BIGINT}, #{msgInfo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{entityId,jdbcType=INTEGER}, #{roomNbr,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{gname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pg.bean.PgMsgLog" >
+    insert into pg_msg_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="msgInfo != null" >
+        msg_info,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="entityId != null" >
+        entity_id,
+      </if>
+      <if test="roomNbr != null" >
+        room_nbr,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="msgInfo != null" >
+        #{msgInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null" >
+        #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="roomNbr != null" >
+        #{roomNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pg.bean.PgMsgLog" >
+    update pg_msg_log
+    <set >
+      <if test="msgInfo != null" >
+        msg_info = #{msgInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null" >
+        entity_id = #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="roomNbr != null" >
+        room_nbr = #{roomNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null" >
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pg.bean.PgMsgLog" >
+    update pg_msg_log
+    set msg_info = #{msgInfo,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      entity_id = #{entityId,jdbcType=INTEGER},
+      room_nbr = #{roomNbr,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      gname = #{gname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getMsgPage" resultMap="BaseResultMap">
+   SELECT * from pg_msg_log pm where pm.entity_id =#{entityId}
+
+    <if test="gname != null and gname !=''" >
+      and pm.gname  like '%${gname}%'
+    </if>
+    <if test="phone != null and phone !=''" >
+      and pm.phone  like '%${phone}%'
+    </if>
+    ORDER BY pm.id DESC
+  </select>
+
+</mapper>
